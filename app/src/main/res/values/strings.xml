@@ -2,7 +2,7 @@
     <string name="app_name">Mushroom Detective</string>
     <string name="cap_diameter_label">Cap Diameter:</string>
     <string name="cap_shape_label">Cap Shape:</string>
-    <string name="cap_surface_label">Cap Surface:</string>
+    <string name="cap_color_label">Cap Color:</string>
     <string name="stem_width_label">Stem Width:</string>
     <string name="submit_label">Submit</string>
     <string name="camera_button_label">Photo</string>
