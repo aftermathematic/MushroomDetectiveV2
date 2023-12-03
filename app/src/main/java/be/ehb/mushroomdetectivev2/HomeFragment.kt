@@ -19,6 +19,16 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
+import org.json.JSONException
+import org.json.JSONObject
+import java.io.IOException
 
 class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelectedListener {
 
@@ -29,7 +39,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
 
         populateSpinner(view, R.id.spinner1, R.array.cap_diameter)
         populateSpinner(view, R.id.spinner2, R.array.cap_shape)
-        populateSpinner(view, R.id.spinner3, R.array.cap_surface)
+        populateSpinner(view, R.id.spinner3, R.array.cap_color)
         populateSpinner(view, R.id.spinner4, R.array.stem_width)
 
         // Initialize the ActivityResultLauncher
@@ -80,7 +90,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
             }
         }
 
-
         // Declare the error text as a string resource
         val errorText = getString(R.string.error_text)
 
@@ -88,10 +97,11 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
         submitButton.setOnClickListener {
 
             if (validateInputs()) {
-                // If not all inputs are valid, display an error message
-                Log.d("HomeFragment", "All inputs are valid")
-            } else {
                 // If all inputs are valid, display a success message
+                Log.d("HomeFragment", "All inputs are valid")
+                callApiAndShowResult()
+            } else {
+                // If not all inputs are valid, display an error message
                 Log.d("HomeFragment", errorText)
             }
         }
@@ -126,7 +136,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
         val array = resources.getStringArray(arrayResourceId)
 
         // Add the default value at the beginning of the list
-        val arrayWithDefault = listOf("...") + array
+        //val arrayWithDefault = listOf("...") + array
+
+        // Don't add default value, for testing purposes
+        val arrayWithDefault = array
 
         val adapter = ArrayAdapter(
             requireContext(),
@@ -137,6 +150,60 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
         spinner.adapter = adapter
     }
 
+    private fun callApiAndShowResult() {
+        val client = OkHttpClient()
+        val jsonMediaType = "application/json; charset=utf-8".toMediaType()
+
+        val jsonObject = JSONObject().apply {
+            put("cap_diameter", getSpinnerValue(R.id.spinner1))
+            put("cap_shape", getSpinnerValue(R.id.spinner2))
+            put("cap_color", getSpinnerValue(R.id.spinner3))
+            put("stem_width", getSpinnerValue(R.id.spinner4))
+        }
+
+        Log.d("HomeFragment", "JSON being sent: $jsonObject")
+
+        val body = jsonObject.toString().toRequestBody(jsonMediaType)
+        val request = Request.Builder()
+            .url("http://lts39.duckdns.org:8000/predict")
+            .post(body)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                activity?.runOnUiThread {
+                    Log.d("HomeFragment", "Request failed: ${e.message}")
+                }
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.use { resp ->
+                    val responseData = resp.body?.string()
+
+                    try {
+                        val jsonResponse = JSONObject(responseData)
+                        val message = jsonResponse.optString("message", "No message provided")
+                        val confidence = jsonResponse.optString("confidence", "No confidence provided")
+
+                        activity?.runOnUiThread {
+                            Toast.makeText(requireContext(), "Message: $message\nConfidence: $confidence", Toast.LENGTH_LONG).show()
+                        }
+                    } catch (e: JSONException) {
+                        activity?.runOnUiThread {
+                            Toast.makeText(requireContext(), "Error parsing response: ${e.message}", Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
+            }
+
+        })
+    }
+
+    private fun getSpinnerValue(spinnerId: Int): String {
+        val spinner: Spinner = view?.findViewById(spinnerId) as Spinner
+        Log.d("HomeFragment", "Flag Spinner")
+        return spinner.selectedItem.toString()
+    }
+
 
 }
-
