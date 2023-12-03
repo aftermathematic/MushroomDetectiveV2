@@ -1,10 +1,13 @@
 package be.ehb.mushroomdetectivev2
 
+import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.graphics.drawable.AnimatedImageDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -55,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 true
             }
-        }, 5000)  // Show splash image for 5 seconds in full screen
+        }, 1000)  // Show splash image for 5 seconds in full screen
     }
 
     private fun setCurrentFragment(fragment: Fragment) =
@@ -63,4 +66,9 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.flFragment, fragment)
             commit()
         }
+
+
+
+
+
 }
