@@ -68,4 +68,9 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
 
+
+    // LiveData
+    val lifecycle_version = "2.2.0"
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/cap_diameter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cap Diameter"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:id="@+id/cap_shape"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cap Shape"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:id="@+id/cap_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cap Color"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:id="@+id/stem_width"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stem Width"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp"/>
+
+</LinearLayout>

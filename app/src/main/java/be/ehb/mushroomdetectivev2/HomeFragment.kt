@@ -105,7 +105,9 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
                     capShape = getSpinnerValue(R.id.spinner2),
                     capColor = getSpinnerValue(R.id.spinner3),
                     stemWidth = getSpinnerValue(R.id.spinner4),
-                    photoUri = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                    photoUri = "",
+                    apiPoison = "",
+                    apiConfidence = ""
                 )
 
                 // Launch the coroutine in the IO dispatcher
