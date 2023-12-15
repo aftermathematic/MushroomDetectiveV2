@@ -19,6 +19,10 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaType
@@ -95,16 +99,32 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
 
         val submitButton: Button = view.findViewById(R.id.submitButton)
         submitButton.setOnClickListener {
-
             if (validateInputs()) {
-                // If all inputs are valid, display a success message
-                Log.d("HomeFragment", "All inputs are valid")
-                callApiAndShowResult()
+                val mushroom = Mushroom(
+                    capDiameter = getSpinnerValue(R.id.spinner1),
+                    capShape = getSpinnerValue(R.id.spinner2),
+                    capColor = getSpinnerValue(R.id.spinner3),
+                    stemWidth = getSpinnerValue(R.id.spinner4),
+                    photoUri = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                )
+
+                // Launch the coroutine in the IO dispatcher
+                lifecycleScope.launch(Dispatchers.IO) {
+                    // Database operation
+                    MushroomDatabase.getDatabase(requireContext()).mushroomDao().insertMushroom(mushroom)
+                    // Switch context back to Main if you need to update UI
+                    withContext(Dispatchers.Main) {
+                        // Update UI here
+                        //Toast.makeText(context, "Mushroom added to database", Toast.LENGTH_SHORT).show()
+                        callApiAndShowResult()
+                    }
+                }
             } else {
-                // If not all inputs are valid, display an error message
-                Log.d("HomeFragment", errorText)
+                Toast.makeText(context, "Validation failed", Toast.LENGTH_SHORT).show()
             }
         }
+
+
     }
 
     // Validation function
