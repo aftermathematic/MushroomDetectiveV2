@@ -1,17 +1,15 @@
 package be.ehb.mushroomdetectivev2
 
-import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.graphics.drawable.AnimatedImageDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +46,7 @@ class MainActivity : AppCompatActivity() {
             setCurrentFragment(homeFragment)
 
             val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+            bottomNavigationView.labelVisibilityMode = NavigationBarView.LABEL_VISIBILITY_LABELED
 
             bottomNavigationView.setOnItemSelectedListener {
                 when (it.itemId) {
