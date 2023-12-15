@@ -5,37 +5,102 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/cap_diameter"
+    <!-- Horizontal LinearLayout for the four attributes to be shown side by side -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cap Diameter"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="4dp"/>
+        android:orientation="horizontal"
+        android:weightSum="4">
 
+        <!-- FrameLayout wrapper for cap_diameter with border -->
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/border_thin">
+            <TextView
+                android:id="@+id/cap_diameter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cap Diameter"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:padding="4dp"/>
+        </FrameLayout>
+
+        <!-- FrameLayout wrapper for cap_shape with border -->
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/border_thin">
+            <TextView
+                android:id="@+id/cap_shape"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cap Shape"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:padding="4dp"/>
+        </FrameLayout>
+
+        <!-- FrameLayout wrapper for cap_color with border -->
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/border_thin">
+            <TextView
+                android:id="@+id/cap_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cap Color"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:padding="4dp"/>
+        </FrameLayout>
+
+        <!-- FrameLayout wrapper for stem_width with border -->
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/border_thin">
+            <TextView
+                android:id="@+id/stem_width"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Stem Width"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:padding="4dp"/>
+        </FrameLayout>
+    </LinearLayout>
+
+
+
+
+    <!-- TextView for api_poison with no border -->
     <TextView
-        android:id="@+id/cap_shape"
+        android:id="@+id/api_poison"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cap Shape"
+        android:text="API Poison"
         android:textSize="16sp"
-        android:layout_marginBottom="4dp"/>
+        android:textColor="@color/colorPrimaryDark"
+        android:padding="4dp"/>
 
+    <!-- TextView for api_confidence with no border -->
     <TextView
-        android:id="@+id/cap_color"
+        android:id="@+id/api_confidence"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cap Color"
+        android:text="API Confidence"
         android:textSize="16sp"
-        android:layout_marginBottom="4dp"/>
-
-    <TextView
-        android:id="@+id/stem_width"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Stem Width"
-        android:textSize="16sp"
-        android:layout_marginBottom="4dp"/>
-
+        android:textColor="@color/colorPrimaryDark"
+        android:padding="4dp"/>
 </LinearLayout>

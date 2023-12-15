@@ -24,5 +24,6 @@ abstract class MushroomDatabase : RoomDatabase() {
                 instance
             }
         }
+
     }
 }

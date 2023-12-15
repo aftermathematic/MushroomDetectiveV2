@@ -16,11 +16,17 @@ class MushroomAdapter : RecyclerView.Adapter<MushroomAdapter.MushroomViewHolder>
         private val capColorView: TextView = itemView.findViewById(R.id.cap_color)
         private val stemWidthView: TextView = itemView.findViewById(R.id.stem_width)
 
+        private val apiPoisonView: TextView = itemView.findViewById(R.id.api_poison)
+        private val apiConfidenceView: TextView = itemView.findViewById(R.id.api_confidence)
+
         fun bind(mushroom: Mushroom) {
             capDiameterView.text = mushroom.capDiameter
             capShapeView.text = mushroom.capShape
             capColorView.text = mushroom.capColor
             stemWidthView.text = mushroom.stemWidth
+            apiPoisonView.text = mushroom.apiPoison
+            apiConfidenceView.text = mushroom.apiConfidence
+
         }
     }
 

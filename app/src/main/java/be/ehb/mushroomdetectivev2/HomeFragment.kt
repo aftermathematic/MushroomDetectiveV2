@@ -98,6 +98,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
         val errorText = getString(R.string.error_text)
 
         val submitButton: Button = view.findViewById(R.id.submitButton)
+// Adjusted submitButton onClickListener
         submitButton.setOnClickListener {
             if (validateInputs()) {
                 val mushroom = Mushroom(
@@ -105,27 +106,17 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
                     capShape = getSpinnerValue(R.id.spinner2),
                     capColor = getSpinnerValue(R.id.spinner3),
                     stemWidth = getSpinnerValue(R.id.spinner4),
-                    photoUri = "",
-                    apiPoison = "",
-                    apiConfidence = ""
+                    photoUri = null, // Initialize with null
+                    apiPoison = null, // Initialize with null
+                    apiConfidence = null // Initialize with null
                 )
 
-                // Launch the coroutine in the IO dispatcher
-                lifecycleScope.launch(Dispatchers.IO) {
-                    // Database operation
-                    MushroomDatabase.getDatabase(requireContext()).mushroomDao().insertMushroom(mushroom)
-                    // Switch context back to Main if you need to update UI
-                    withContext(Dispatchers.Main) {
-                        // Update UI here
-                        //Toast.makeText(context, "Mushroom added to database", Toast.LENGTH_SHORT).show()
-                        callApiAndShowResult()
-                    }
-                }
+                // Call the API and handle database insertion upon successful response
+                callApiAndShowResult(mushroom)
             } else {
                 Toast.makeText(context, "Validation failed", Toast.LENGTH_SHORT).show()
             }
         }
-
 
     }
 
@@ -142,8 +133,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
             spinner.selectedItem.toString() != defaultSpinnerValue
         }
     }
-
-
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         // Handle spinner item selection
@@ -172,18 +161,19 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
         spinner.adapter = adapter
     }
 
-    private fun callApiAndShowResult() {
+    // Adjusted callApiAndShowResult function
+    private fun callApiAndShowResult(mushroom: Mushroom) {
         val client = OkHttpClient()
         val jsonMediaType = "application/json; charset=utf-8".toMediaType()
 
+        // Your existing jsonObject creation
         val jsonObject = JSONObject().apply {
-            put("cap_diameter", getSpinnerValue(R.id.spinner1))
-            put("cap_shape", getSpinnerValue(R.id.spinner2))
-            put("cap_color", getSpinnerValue(R.id.spinner3))
-            put("stem_width", getSpinnerValue(R.id.spinner4))
+            put("cap_diameter", mushroom.capDiameter)
+            put("cap_shape", mushroom.capShape)
+            put("cap_color", mushroom.capColor)
+            put("stem_width", mushroom.stemWidth)
+            //put("photo_uri", mushroom.photoUri)
         }
-
-        Log.d("HomeFragment", "JSON being sent: $jsonObject")
 
         val body = jsonObject.toString().toRequestBody(jsonMediaType)
         val request = Request.Builder()
@@ -194,6 +184,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 activity?.runOnUiThread {
+                    Toast.makeText(requireContext(), "API request failed: ${e.message}", Toast.LENGTH_LONG).show()
                     Log.d("HomeFragment", "Request failed: ${e.message}")
                 }
             }
@@ -204,20 +195,58 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
 
                     try {
                         val jsonResponse = JSONObject(responseData)
-                        val message = jsonResponse.optString("message", "No message provided")
-                        val confidence = jsonResponse.optString("confidence", "No confidence provided")
 
-                        activity?.runOnUiThread {
-                            Toast.makeText(requireContext(), "Message: $message\nConfidence: $confidence", Toast.LENGTH_LONG).show()
+                        // if the API returns a 200 status code, enter the following code block
+                        if (resp.code == 200) {
+                            activity?.runOnUiThread {
+                                Toast.makeText(requireContext(), "API request successful", Toast.LENGTH_LONG).show()
+                                Log.d("HomeFragment", "Request successful")
+                            }
+
+                            val mushroom_poisonous = getString(R.string.mushroom_poisonous)
+                            val mushroom_edible = getString(R.string.mushroom_edible)
+                            val no_message_provided = getString(R.string.no_message_provided)
+                            val no_confidence_provided = getString(R.string.no_confidence_provided)
+                            val mushroom_title_confidence = getString(R.string.Confidence)
+                            val mushroom_title_message = getString(R.string.message_title_result)
+
+                            val message = jsonResponse.optString("message", no_message_provided)
+                            val confidence = jsonResponse.optString("confidence", no_confidence_provided)
+
+                            var msgResponse = no_message_provided
+                            if(message == "Deze paddenstoel is giftig") {
+                                msgResponse = mushroom_poisonous
+                            } else if (message == "Deze paddenstoel is eetbaar") {
+                                msgResponse = mushroom_edible
+                            }
+                            msgResponse = "$mushroom_title_message $msgResponse"
+
+                            mushroom.apiPoison = msgResponse
+                            mushroom.apiConfidence = "$mushroom_title_confidence $confidence"
+
+                            // Launch coroutine to insert mushroom into the database
+                            lifecycleScope.launch(Dispatchers.IO) {
+                                MushroomDatabase.getDatabase(requireContext()).mushroomDao().insertMushroom(mushroom)
+                            }
+
+                            activity?.runOnUiThread {
+                                Toast.makeText(requireContext(), "Message: $message\nConfidence: $confidence", Toast.LENGTH_LONG).show()
+                            }
+
+                        } else {
+                            // throw an exception if the API returns a status code other than 200
+                            throw IOException("Unexpected HTTP code $resp.code")
                         }
+
+
                     } catch (e: JSONException) {
                         activity?.runOnUiThread {
-                            Toast.makeText(requireContext(), "Error parsing response: ${e.message}", Toast.LENGTH_LONG).show()
+                            Toast.makeText(requireContext(), "API response parsing failed: ${e.message}", Toast.LENGTH_LONG).show()
+                            Log.d("HomeFragment", "Error parsing response: ${e.message}")
                         }
                     }
                 }
             }
-
         })
     }
 

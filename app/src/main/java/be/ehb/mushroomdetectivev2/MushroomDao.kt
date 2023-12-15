@@ -12,6 +12,7 @@ interface MushroomDao {
     //suspend
     fun insertMushroom(mushroom: Mushroom): Long
 
-    @Query("SELECT * FROM mushroom_table")
+    @Query("SELECT * FROM mushroom_table ORDER BY id DESC")
     fun getAllMushrooms(): Flow<List<Mushroom>>
+
 }

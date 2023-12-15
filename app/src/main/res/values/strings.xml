@@ -1,21 +1,24 @@
 <resources>
-    <string name="app_name">Mushroom Detective</string>
-    <string name="cap_diameter_label">Cap Diameter:</string>
+    <string name="app_name" translatable="false">Mushroom Detective</string>
     <string name="cap_shape_label">Cap Shape:</string>
     <string name="cap_color_label">Cap Color:</string>
     <string name="stem_width_label">Stem Width:</string>
     <string name="submit_label">Submit</string>
     <string name="camera_button_label">Photo</string>
     <string name="error_text">Please complete all required fields</string>
-    <string name="home">Home</string>
+    <string name="home" translatable="false">Home</string>
     <string name="library">Library</string>
     <string name="mode">Light/Dark</string>
     <string name="archive">Archive</string>
     <string name="dark_mode">Dark mode</string>
 
     <string name="permission_required">Camera access is required to display the camera preview.</string>
-    <string name="ok">OK</string>
+    <string name="ok" translatable="false">OK</string>
     <string name="permission_granted">Permission is granted. You can use the camera now.</string>
+
+    <string name="mushroom_poisonous">This mushroom is poisonous!</string>
+    <string name="mushroom_edible">This mushroom is edible.</string>
+
 
     //Spinner1 values
     <string-array name="cap_diameter">
@@ -521,4 +524,11 @@
         <item>97.75</item>
         <item>98.00</item>
     </string-array>
+    <string name="cap_diameter_label">Cap Diameter:</string>
+    <string name="Confidence">Reliability:</string>
+    <string name="no_message_provided" >No message provided</string>
+    <string name="no_confidence_provided" >No reliability-score provided</string>
+    <string name="message_title_result">Result:</string>
+    <string name="language_en">Set language to English</string>
+    <string name="language_nl">Set language to Dutch</string>
 </resources>

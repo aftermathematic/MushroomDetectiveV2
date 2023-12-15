@@ -40,5 +40,6 @@ class ArchiveFragment : Fragment(R.layout.fragment_archive) {
                 adapter.setMushrooms(it)
             }
         })
+
     }
 }

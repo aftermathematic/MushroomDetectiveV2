@@ -15,6 +15,7 @@ class MushroomViewModel(private val repository: MushroomRepository) : ViewModel(
     fun insert(mushroom: Mushroom) = viewModelScope.launch {
         repository.insert(mushroom)
     }
+
 }
 
 class MushroomRepository(private val mushroomDao: MushroomDao) {

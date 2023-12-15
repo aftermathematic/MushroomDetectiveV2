@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cap_diameter_label">Hoed Diameter:</string>
+    <string name="cap_shape_label">Hoed Vorm:</string>
+    <string name="cap_color_label">Hoed Kleur:</string>
+    <string name="stem_width_label">Stam Breedte:</string>
+    <string name="submit_label">Indienen</string>
+    <string name="camera_button_label">Foto</string>
+    <string name="error_text">Gelieve alle velden in te vullen</string>
+    <string name="library">Bibliotheek</string>
+    <string name="mode">Licht/Donker</string>
+    <string name="archive">Archief</string>
+    <string name="dark_mode">Donkere modus</string>
+    <string name="permission_required">Om het cameravoorbeeld weer te geven is cameratoegang vereist.</string>
+    <string name="permission_granted">Er wordt toestemming verleend. Je kunt de camera nu gebruiken.</string>
+    <string name="mushroom_poisonous">Deze paddenstoel is giftig!</string>
+    <string name="mushroom_edible">Deze paddenstoel is eetbaar.</string>
+    <string name="Confidence">Betrouwbaarheid:</string>
+    <string name="no_message_provided">Geen bericht geretourneerd</string>
+    <string name="no_confidence_provided">Geen betrouwbaarheidsscore geretourneerd</string>
+    <string name="message_title_result">Resultaat:</string>
+    <string name="language_en">Pas taal aan naar Engels</string>
+    <string name="language_nl">Pas taal aan naar Nederlands</string>
+</resources>
