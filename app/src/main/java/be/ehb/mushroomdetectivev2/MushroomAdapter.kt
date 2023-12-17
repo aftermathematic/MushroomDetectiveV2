@@ -23,12 +23,12 @@ class MushroomAdapter : RecyclerView.Adapter<MushroomAdapter.MushroomViewHolder>
 
             // Determine if the mushroom is poisonous or edible, and fill the variable with the proper string resource
             var poisonOrEdible = ""
-            if(mushroom.apiPoison == "P"){
-                poisonOrEdible = itemView.context.getString(R.string.mushroom_poisonous)
+            poisonOrEdible = if(mushroom.apiPoison == "P"){
+                itemView.context.getString(R.string.mushroom_poisonous)
             } else if (mushroom.apiPoison == "E"){
-                poisonOrEdible = itemView.context.getString(R.string.mushroom_edible)
+                itemView.context.getString(R.string.mushroom_edible)
             } else {
-                poisonOrEdible = itemView.context.getString(R.string.mushroom_unknown)
+                itemView.context.getString(R.string.mushroom_unknown)
             }
 
             capDiameterView.text = mushroom.capDiameter

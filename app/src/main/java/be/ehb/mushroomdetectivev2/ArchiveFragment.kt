@@ -23,7 +23,7 @@ class ArchiveFragment : Fragment(R.layout.fragment_archive) {
 
         // Use the factory to create a ViewModel
         val factory = MushroomViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory).get(MushroomViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory)[MushroomViewModel::class.java]
 
         // Set up RecyclerView and Adapter
         recyclerView = view.findViewById(R.id.recyclerview_archive)
@@ -32,7 +32,7 @@ class ArchiveFragment : Fragment(R.layout.fragment_archive) {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // Get the ViewModel
-        viewModel = ViewModelProvider(this).get(MushroomViewModel::class.java)
+        viewModel = ViewModelProvider(this)[MushroomViewModel::class.java]
 
         // Observe the LiveData, updating the list when the data changes
         viewModel.allMushrooms.observe(viewLifecycleOwner, Observer { mushrooms ->
