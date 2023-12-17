@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Switch
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 
 class DarkFragment:Fragment(R.layout.fragment_dark) {
@@ -14,20 +13,21 @@ class DarkFragment:Fragment(R.layout.fragment_dark) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val switch: Switch = view.findViewById(R.id.switch1)
+        val switch: Switch = view.findViewById(R.id.switch_dark)
+
+        // Set the switch state according to the current night mode
+        when (AppCompatDelegate.getDefaultNightMode()) {
+            AppCompatDelegate.MODE_NIGHT_YES -> switch.isChecked = true
+            AppCompatDelegate.MODE_NIGHT_NO -> switch.isChecked = false
+        }
 
         switch.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                // The switch is enabled/checked
                 Log.d(TAG, "isChecked")
-
                 // Set the theme to dark
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-
             } else {
                 Log.d(TAG, "isNotChecked")
-                // The switch is disabled
-
                 // Set the theme to light
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }

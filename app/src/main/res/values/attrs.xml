@@ -1,4 +1,5 @@
 <resources>
-    <!-- Define custom attributes here -->
     <attr name="colorBg" format="reference"/>
+    <attr name="colorText" format="reference"/>
+    <attr name="colorTitle" format="reference"/>
 </resources>
