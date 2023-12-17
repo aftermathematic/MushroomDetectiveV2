@@ -99,7 +99,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
         val errorText = getString(R.string.error_text)
 
         val submitButton: Button = view.findViewById(R.id.submitButton)
-// Adjusted submitButton onClickListener
+        // Adjusted submitButton onClickListener
         submitButton.setOnClickListener {
             if (validateInputs()) {
                 val mushroom = Mushroom(
@@ -247,6 +247,8 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
                 }
             }
         })
+
+
     }
 
     private fun getSpinnerValue(spinnerId: Int): String {

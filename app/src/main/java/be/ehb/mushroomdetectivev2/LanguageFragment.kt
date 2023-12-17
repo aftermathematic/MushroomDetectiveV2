@@ -16,15 +16,6 @@ import java.util.*
 
 class LanguageFragment : Fragment(R.layout.fragment_language) {
 
-    private fun setLocale(language: String) {
-        val locale = Locale(language)
-        val resources: Resources = requireContext().resources
-        val config: Configuration = resources.configuration
-        config.setLocale(locale)
-        Locale.setDefault(locale)
-        resources.configuration.updateFrom(config)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
