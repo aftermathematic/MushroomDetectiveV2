@@ -533,4 +533,5 @@
     <string name="language_nl">Set language to Dutch</string>
     <string name="language">Language</string>
     <string name="light_dark">Light / Dark</string>
+    <string name="mushroom_unknown">The toxicity of this mushroom cannot be determined</string>
 </resources>

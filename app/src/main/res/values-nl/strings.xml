@@ -23,4 +23,5 @@
     <string name="language_nl">Pas taal aan naar Nederlands</string>
     <string name="language">Taal</string>
     <string name="light_dark">Licht / Donker</string>
+    <string name="mushroom_unknown">De giftigheid van deze paddenstoel kan niet bepaald worden</string>
 </resources>

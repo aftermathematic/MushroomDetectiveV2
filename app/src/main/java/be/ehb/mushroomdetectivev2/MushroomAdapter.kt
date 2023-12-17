@@ -20,12 +20,27 @@ class MushroomAdapter : RecyclerView.Adapter<MushroomAdapter.MushroomViewHolder>
         private val apiConfidenceView: TextView = itemView.findViewById(R.id.api_confidence)
 
         fun bind(mushroom: Mushroom) {
+
+            // Determine if the mushroom is poisonous or edible, and fill the variable with the proper string resource
+            var poisonOrEdible = ""
+            if(mushroom.apiPoison == "P"){
+                poisonOrEdible = itemView.context.getString(R.string.mushroom_poisonous)
+            } else if (mushroom.apiPoison == "E"){
+                poisonOrEdible = itemView.context.getString(R.string.mushroom_edible)
+            } else {
+                poisonOrEdible = itemView.context.getString(R.string.mushroom_unknown)
+            }
+
             capDiameterView.text = mushroom.capDiameter
             capShapeView.text = mushroom.capShape
             capColorView.text = mushroom.capColor
             stemWidthView.text = mushroom.stemWidth
-            apiPoisonView.text = mushroom.apiPoison
+            apiPoisonView.text = poisonOrEdible
             apiConfidenceView.text = mushroom.apiConfidence
+
+            // write String resource 'poisonous'  to a variable
+            val poisonous = itemView.context.getString(R.string.mushroom_poisonous)
+
 
         }
     }

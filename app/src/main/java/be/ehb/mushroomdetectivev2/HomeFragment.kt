@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.TextUtils.replace
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -199,39 +200,37 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
                         // if the API returns a 200 status code, enter the following code block
                         if (resp.code == 200) {
                             activity?.runOnUiThread {
-                                Toast.makeText(requireContext(), "API request successful", Toast.LENGTH_LONG).show()
                                 Log.d("HomeFragment", "Request successful")
                             }
 
-                            val mushroom_poisonous = getString(R.string.mushroom_poisonous)
-                            val mushroom_edible = getString(R.string.mushroom_edible)
-                            val no_message_provided = getString(R.string.no_message_provided)
-                            val no_confidence_provided = getString(R.string.no_confidence_provided)
-                            val mushroom_title_confidence = getString(R.string.Confidence)
-                            val mushroom_title_message = getString(R.string.message_title_result)
+                            val message = jsonResponse.optString("message")
+                            val confidence = jsonResponse.optString("confidence")
 
-                            val message = jsonResponse.optString("message", no_message_provided)
-                            val confidence = jsonResponse.optString("confidence", no_confidence_provided)
-
-                            var msgResponse = no_message_provided
+                            var msgResponse = ""
                             if(message == "Deze paddenstoel is giftig") {
-                                msgResponse = mushroom_poisonous
+                                msgResponse = "P"
                             } else if (message == "Deze paddenstoel is eetbaar") {
-                                msgResponse = mushroom_edible
+                                msgResponse = "E"
                             }
-                            msgResponse = "$mushroom_title_message $msgResponse"
 
                             mushroom.apiPoison = msgResponse
-                            mushroom.apiConfidence = "$mushroom_title_confidence $confidence"
+                            mushroom.apiConfidence = confidence
 
                             // Launch coroutine to insert mushroom into the database
                             lifecycleScope.launch(Dispatchers.IO) {
                                 MushroomDatabase.getDatabase(requireContext()).mushroomDao().insertMushroom(mushroom)
+
+                                // Switch to the ArchiveFragment
+                                withContext(Dispatchers.Main) {
+                                    val archiveFragment = ArchiveFragment()
+                                    val transaction = parentFragmentManager.beginTransaction()
+                                    transaction.replace(R.id.flFragment, archiveFragment)
+                                    transaction.commit()
+                                }
+
                             }
 
-                            activity?.runOnUiThread {
-                                Toast.makeText(requireContext(), "Message: $message\nConfidence: $confidence", Toast.LENGTH_LONG).show()
-                            }
+
 
                         } else {
                             // throw an exception if the API returns a status code other than 200

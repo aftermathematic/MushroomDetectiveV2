@@ -82,8 +82,6 @@
     </LinearLayout>
 
 
-
-
     <!-- TextView for api_poison with no border -->
     <TextView
         android:id="@+id/api_poison"
@@ -94,13 +92,35 @@
         android:textColor="?attr/colorText"
         android:padding="4dp"/>
 
-    <!-- TextView for api_confidence with no border -->
-    <TextView
-        android:id="@+id/api_confidence"
+    <!-- Horizontal LinearLayout for the api_confidence and the new TextView -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="API Confidence"
-        android:textSize="16sp"
-        android:textColor="?attr/colorText"
-        android:padding="4dp"/>
+        android:orientation="horizontal"
+        android:weightSum="2"> <!-- Assuming an even split for the two TextViews -->
+
+        <!-- New TextView for the label 'Confidence' -->
+        <TextView
+            android:id="@+id/textview_confidence_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/Confidence"
+            android:textSize="16sp"
+            android:gravity="center_vertical"
+            android:textColor="?attr/colorText"
+            android:padding="4dp"/>
+
+        <!-- TextView for api_confidence with no border -->
+        <TextView
+            android:id="@+id/api_confidence"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="API Confidence"
+            android:textSize="16sp"
+            android:gravity="center_vertical"
+            android:textColor="?attr/colorText"
+            android:padding="4dp"/>
+    </LinearLayout>
 </LinearLayout>
