@@ -5,8 +5,12 @@ import android.graphics.drawable.AnimatedImageDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.TextUtils.replace
 import android.widget.ImageView
+import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -62,14 +66,12 @@ class MainActivity : AppCompatActivity() {
         }, 1000)  // Show splash image for 5 seconds in full screen
     }
 
-    private fun setCurrentFragment(fragment: Fragment) =
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.flFragment, fragment)
-            commit()
+    private fun setCurrentFragment(fragment: Fragment) {
+        if (!supportFragmentManager.isDestroyed) {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.flFragment, fragment)
+            }.commit()
         }
-
-
-
-
+    }
 
 }

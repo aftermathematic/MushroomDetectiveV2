@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homeFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/homeFragment"
     tools:context=".MainActivity">
 
 
@@ -15,8 +14,8 @@
         android:layout_width="120dp"
         android:layout_height="160dp"
         android:layout_marginBottom="10dp"
-        android:src="@drawable/image_placeholder"
         android:background="@drawable/border"
+        android:src="@drawable/image_placeholder"
         app:layout_constraintBottom_toTopOf="@id/cameraButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -26,12 +25,12 @@
         android:id="@+id/cameraButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/camera_button_label"
-        android:background="@color/colorPrimaryDark"
         android:layout_marginBottom="10dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/camera_button_label"
         app:layout_constraintBottom_toTopOf="@+id/textCapDiameter"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <!-- Spinner1 - Cap diameter -->
     <TextView
@@ -39,11 +38,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cap_diameter_label"
-        android:textStyle="bold"
         android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/spinner1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
         android:id="@+id/spinner1"
@@ -55,8 +54,8 @@
         android:minWidth="150dp"
         android:minHeight="30dp"
         app:layout_constraintBottom_toTopOf="@id/textCapShape"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <!-- Spinner2 - Cap shape -->
     <TextView
@@ -64,11 +63,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cap_shape_label"
-        android:textStyle="bold"
         android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/spinner2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
         android:id="@+id/spinner2"
@@ -81,8 +80,8 @@
         android:minWidth="150dp"
         android:minHeight="30dp"
         app:layout_constraintBottom_toTopOf="@id/textCapColor"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <!-- Spinner3 - Cap surface -->
     <TextView
@@ -90,11 +89,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cap_color_label"
-        android:textStyle="bold"
         android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/spinner3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
         android:id="@+id/spinner3"
@@ -106,9 +105,9 @@
         android:gravity="center"
         android:minWidth="150dp"
         android:minHeight="30dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textStemWidth"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/textStemWidth"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <!-- Spinner4 - Stem Width -->
     <TextView
@@ -116,8 +115,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/stem_width_label"
-        android:textStyle="bold"
         android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/spinner4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -145,14 +144,13 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
+        android:background="@color/colorPrimary"
         android:text="@string/submit_label"
         android:textColor="@color/white"
-        android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

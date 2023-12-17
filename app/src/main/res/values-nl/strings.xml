@@ -21,4 +21,6 @@
     <string name="message_title_result">Resultaat:</string>
     <string name="language_en">Pas taal aan naar Engels</string>
     <string name="language_nl">Pas taal aan naar Nederlands</string>
+    <string name="language">Taal</string>
+    <string name="light_dark">Licht / Donker</string>
 </resources>

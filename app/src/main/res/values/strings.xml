@@ -21,7 +21,7 @@
 
 
     //Spinner1 values
-    <string-array name="cap_diameter">
+    <string-array translatable="false" name="cap_diameter">
         <item>0.25</item>
         <item>0.50</item>
         <item>0.75</item>
@@ -105,7 +105,7 @@
     </string-array>
 
     //Spinner2 values
-    <string-array name="cap_shape">
+    <string-array translatable="false" name="cap_shape">
         <item>B</item>
         <item>C</item>
         <item>F</item>
@@ -116,7 +116,7 @@
     </string-array>
 
     //Spinner3 values
-    <string-array name="cap_color">
+    <string-array translatable="false" name="cap_color">
         <item>D</item>
         <item>E</item>
         <item>G</item>
@@ -131,7 +131,7 @@
     </string-array>
 
     //Spinner4 values
-    <string-array name="stem_width">
+    <string-array translatable="false" name="stem_width">
         <item>0.50</item>
         <item>0.75</item>
         <item>1.00</item>
@@ -531,4 +531,6 @@
     <string name="message_title_result">Result:</string>
     <string name="language_en">Set language to English</string>
     <string name="language_nl">Set language to Dutch</string>
+    <string name="language">Language</string>
+    <string name="light_dark">Light / Dark</string>
 </resources>
