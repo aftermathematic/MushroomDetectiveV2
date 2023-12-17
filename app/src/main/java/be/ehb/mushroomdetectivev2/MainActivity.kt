@@ -5,17 +5,11 @@ import android.graphics.drawable.AnimatedImageDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.text.TextUtils.replace
 import android.widget.ImageView
-import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.widget.SwitchCompat
-import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
-import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

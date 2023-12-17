@@ -1,18 +1,14 @@
 package be.ehb.mushroomdetectivev2
 
 import android.content.ContentValues
-import android.content.Context
-import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.Switch
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.Fragment
-import java.util.*
+import java.util.Locale
 
 class LanguageFragment : Fragment(R.layout.fragment_language) {
 

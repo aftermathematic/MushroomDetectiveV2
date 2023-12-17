@@ -19,7 +19,7 @@ import java.util.concurrent.CountDownLatch
 class MushroomTest {
 
     @Test
-    fun Sending_request_to_MushroomAPI_returns_status_200() {
+    fun sending_request_to_MushroomAPI_returns_status_200() {
         val client = OkHttpClient()
         val jsonMediaType = "application/json; charset=utf-8".toMediaType()
         val jsonObject = JSONObject().apply {
@@ -53,7 +53,7 @@ class MushroomTest {
     }
 
     @Test
-    fun Sending_bad_request_to_MushroomAPI_fails() {
+    fun sending_bad_request_to_MushroomAPI_fails() {
         val client = OkHttpClient()
         val jsonMediaType = "application/json; charset=utf-8".toMediaType()
         val jsonObject = JSONObject().apply {

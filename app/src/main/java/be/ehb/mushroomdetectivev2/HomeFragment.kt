@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
-import android.text.TextUtils.replace
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -150,13 +149,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
         // Add the default value at the beginning of the list
         //val arrayWithDefault = listOf("...") + array
 
-        // Don't add default value, for testing purposes
-        val arrayWithDefault = array
-
         val adapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_item,
-            arrayWithDefault
+            array
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
