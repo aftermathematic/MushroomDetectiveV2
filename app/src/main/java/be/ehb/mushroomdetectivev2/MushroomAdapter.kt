@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MushroomAdapter : RecyclerView.Adapter<MushroomAdapter.MushroomViewHolder>() {
 
+    // Declare an empty list of mushrooms
     private var mushrooms = emptyList<Mushroom>()
 
     class MushroomViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
@@ -15,27 +16,29 @@ class MushroomAdapter : RecyclerView.Adapter<MushroomAdapter.MushroomViewHolder>
         private val capShapeView: TextView = itemView.findViewById(R.id.cap_shape)
         private val capColorView: TextView = itemView.findViewById(R.id.cap_color)
         private val stemWidthView: TextView = itemView.findViewById(R.id.stem_width)
-        //private val photoUriView: TextView = itemView.findViewById(R.id.photo_uri)
         private val apiPoisonView: TextView = itemView.findViewById(R.id.api_poison)
         private val apiConfidenceView: TextView = itemView.findViewById(R.id.api_confidence)
 
         fun bind(mushroom: Mushroom) {
 
             // Determine if the mushroom is poisonous or edible, and fill the variable with the proper string resource
-            var poisonOrEdible = ""
-            poisonOrEdible = if(mushroom.apiPoison == "P"){
-                itemView.context.getString(R.string.mushroom_poisonous)
-            } else if (mushroom.apiPoison == "E"){
-                itemView.context.getString(R.string.mushroom_edible)
-            } else {
-                itemView.context.getString(R.string.mushroom_unknown)
+            val poisonOrEdible: String = when (mushroom.apiPoison) {
+                "P" -> {
+                    itemView.context.getString(R.string.mushroom_poisonous)
+                }
+                "E" -> {
+                    itemView.context.getString(R.string.mushroom_edible)
+                }
+                else -> {
+                    itemView.context.getString(R.string.mushroom_unknown)
+                }
             }
 
+            // Set the TextViews to the mushroom's properties
             capDiameterView.text = mushroom.capDiameter
             capShapeView.text = mushroom.capShape
             capColorView.text = mushroom.capColor
             stemWidthView.text = mushroom.stemWidth
-            //photoUriView.text = mushroom.photoUri
             apiPoisonView.text = poisonOrEdible
             apiConfidenceView.text = mushroom.apiConfidence
 

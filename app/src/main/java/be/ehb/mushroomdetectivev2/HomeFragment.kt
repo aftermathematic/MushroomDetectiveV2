@@ -46,6 +46,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Initialize the spinners
         populateSpinner(view, R.id.spinner1, R.array.cap_diameter)
         populateSpinner(view, R.id.spinner2, R.array.cap_shape)
         populateSpinner(view, R.id.spinner3, R.array.cap_color)
@@ -79,12 +80,15 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
                     cameraLauncher.launch(takePictureIntent)
                 } catch (e: ActivityNotFoundException) {
                     // Handle the exception
+                    Log.e("HomeFragment", "Error launching camera: ${e.message}")
                 }
             } else {
                 // Permission is denied. Handle the denial.
+                Log.e("HomeFragment", "Camera permission denied")
             }
         }
 
+        //
         val cameraButton: Button = view.findViewById(R.id.cameraButton)
         cameraButton.setOnClickListener {
             // Check if the camera permission is granted
@@ -104,9 +108,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
                 permissionLauncher.launch(android.Manifest.permission.CAMERA)
             }
         }
-
-        // Declare the error text as a string resource
-        val errorText = getString(R.string.error_text)
 
         val submitButton: Button = view.findViewById(R.id.submitButton)
         // Adjusted submitButton onClickListener
@@ -134,10 +135,12 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
     // Validation function
     private val defaultSpinnerValue = "..."
 
+    // Function to validate the inputs. Returns true if all inputs are valid, false otherwise.
     private fun validateInputs(): Boolean {
         //if (!isPhotoSelected) return false // Check if a photo is selected
 
         // Check if all spinners have a value other than '...'
+        // For demo purposes, adding the '...' value to the spinners as default value is temporarily disabled
         val spinnerIds = listOf(R.id.spinner1, R.id.spinner2, R.id.spinner3, R.id.spinner4)
         return spinnerIds.all { spinnerId ->
             val spinner: Spinner = view?.findViewById(spinnerId) as Spinner
@@ -157,9 +160,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
         val spinner: Spinner = view.findViewById(spinnerId)
         val array = resources.getStringArray(arrayResourceId)
 
-        // Add the default value at the beginning of the list
-        //val arrayWithDefault = listOf("...") + array
-
         val adapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_item,
@@ -174,21 +174,22 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
         val client = OkHttpClient()
         val jsonMediaType = "application/json; charset=utf-8".toMediaType()
 
-        // Your existing jsonObject creation
+        // Create a JSON object with the mushroom data
         val jsonObject = JSONObject().apply {
             put("cap_diameter", mushroom.capDiameter)
             put("cap_shape", mushroom.capShape)
             put("cap_color", mushroom.capColor)
             put("stem_width", mushroom.stemWidth)
-            //put("photo_uri", mushroom.photoUri)
         }
 
+        //
         val body = jsonObject.toString().toRequestBody(jsonMediaType)
         val request = Request.Builder()
             .url("http://lts39.duckdns.org:8000/predict")
             .post(body)
             .build()
 
+        //
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 activity?.runOnUiThread {
@@ -213,6 +214,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
                             val message = jsonResponse.optString("message")
                             val confidence = jsonResponse.optString("confidence")
 
+                            // Map the API response to P or E
                             var msgResponse = ""
                             if(message == "Deze paddenstoel is giftig") {
                                 msgResponse = "P"
@@ -220,6 +222,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
                                 msgResponse = "E"
                             }
 
+                            // Update the mushroom object with the API response
                             mushroom.apiPoison = msgResponse
                             mushroom.apiConfidence = confidence
 
@@ -236,8 +239,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
                                 }
 
                             }
-
-
 
                         } else {
                             // throw an exception if the API returns a status code other than 200
@@ -258,12 +259,14 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
 
     }
 
+    // Function to get the selected value from a spinner
     private fun getSpinnerValue(spinnerId: Int): String {
         val spinner: Spinner = view?.findViewById(spinnerId) as Spinner
         Log.d("HomeFragment", "Flag Spinner")
         return spinner.selectedItem.toString()
     }
 
+    // Function to encode the taken photo to a Base64 string, for storing as a string in the database
     private fun encodeImage(bm: Bitmap): String? {
         val baos = ByteArrayOutputStream()
         bm.compress(Bitmap.CompressFormat.JPEG, 100, baos)

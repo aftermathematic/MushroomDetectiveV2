@@ -5,14 +5,13 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Horizontal LinearLayout for the four attributes to be shown side by side -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="4">
+        android:weightSum="4"
+        android:baselineAligned="false">
 
-        <!-- FrameLayout wrapper for cap_diameter with border -->
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -22,14 +21,12 @@
                 android:id="@+id/cap_diameter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cap Diameter"
                 android:textSize="16sp"
                 android:gravity="center"
                 android:textColor="@color/colorPrimaryDark"
                 android:padding="4dp"/>
         </FrameLayout>
 
-        <!-- FrameLayout wrapper for cap_shape with border -->
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -39,14 +36,12 @@
                 android:id="@+id/cap_shape"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cap Shape"
                 android:textSize="16sp"
                 android:gravity="center"
                 android:textColor="@color/colorPrimaryDark"
                 android:padding="4dp"/>
         </FrameLayout>
 
-        <!-- FrameLayout wrapper for cap_color with border -->
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -56,14 +51,12 @@
                 android:id="@+id/cap_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cap Color"
                 android:textSize="16sp"
                 android:gravity="center"
                 android:textColor="@color/colorPrimaryDark"
                 android:padding="4dp"/>
         </FrameLayout>
 
-        <!-- FrameLayout wrapper for stem_width with border -->
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -73,7 +66,6 @@
                 android:id="@+id/stem_width"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Stem Width"
                 android:textSize="16sp"
                 android:gravity="center"
                 android:textColor="@color/colorPrimaryDark"
@@ -81,25 +73,20 @@
         </FrameLayout>
     </LinearLayout>
 
-
-    <!-- TextView for api_poison with no border -->
     <TextView
         android:id="@+id/api_poison"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="API Poison"
         android:textSize="16sp"
         android:textColor="?attr/colorText"
         android:padding="4dp"/>
 
-    <!-- Horizontal LinearLayout for the api_confidence and the new TextView -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="2"> <!-- Assuming an even split for the two TextViews -->
+        android:weightSum="2">
 
-        <!-- New TextView for the label 'Confidence' -->
         <TextView
             android:id="@+id/textview_confidence_label"
             android:layout_width="0dp"
@@ -111,13 +98,11 @@
             android:textColor="?attr/colorText"
             android:padding="4dp"/>
 
-        <!-- TextView for api_confidence with no border -->
         <TextView
             android:id="@+id/api_confidence"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="API Confidence"
             android:textSize="16sp"
             android:gravity="center_vertical"
             android:textColor="?attr/colorText"
@@ -127,8 +112,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
         <ImageView
             android:id="@+id/mushroom_photo"
@@ -136,6 +121,6 @@
             android:layout_height="160dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/border"
-            android:src="@drawable/image_placeholder" />
+            android:src="@drawable/image_placeholder"/>
     </LinearLayout>
 </LinearLayout>

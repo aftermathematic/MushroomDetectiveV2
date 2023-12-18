@@ -7,9 +7,7 @@ import androidx.lifecycle.asLiveData
 import kotlinx.coroutines.flow.Flow
 
 class MushroomViewModel(private val repository: MushroomRepository) : ViewModel() {
-
     val allMushrooms: LiveData<List<Mushroom>> = repository.allMushrooms.asLiveData()
-
 }
 
 class MushroomRepository(private val mushroomDao: MushroomDao) {

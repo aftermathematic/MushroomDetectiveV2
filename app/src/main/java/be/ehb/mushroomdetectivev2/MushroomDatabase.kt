@@ -8,6 +8,8 @@ import androidx.room.RoomDatabase
 @Database(entities = [Mushroom::class], version = 2)
 abstract class MushroomDatabase : RoomDatabase() {
     abstract fun mushroomDao(): MushroomDao
+
+    // create a singleton
     companion object {
         @Volatile
         private var INSTANCE: MushroomDatabase? = null

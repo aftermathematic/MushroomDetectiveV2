@@ -31,8 +31,9 @@ class MainActivity : AppCompatActivity() {
             }
         }.start()
 
-        // Handler to switch to the main layout and show HomeFragment after 2 seconds
+        // Handler to switch to the main layout and show HomeFragment after 5 seconds
         Handler(Looper.getMainLooper()).postDelayed({
+
             // Set the content view to your activity_main layout
             setContentView(R.layout.activity_main)
 
@@ -45,6 +46,7 @@ class MainActivity : AppCompatActivity() {
             // Set the HomeFragment to the FrameLayout
             setCurrentFragment(homeFragment)
 
+            // Initialize and set the bottom navigation bar
             val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
             bottomNavigationView.labelVisibilityMode = NavigationBarView.LABEL_VISIBILITY_LABELED
 
@@ -57,9 +59,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 true
             }
-        }, 1000)  // Show splash image for 5 seconds in full screen
+        }, 5000)  // Show splash image for 5 seconds in full screen
     }
 
+    // Function to set the current fragment
     private fun setCurrentFragment(fragment: Fragment) {
         if (!supportFragmentManager.isDestroyed) {
             supportFragmentManager.beginTransaction().apply {

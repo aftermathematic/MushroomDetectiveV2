@@ -8,7 +8,7 @@ import android.widget.Switch
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 
-class DarkFragment:Fragment(R.layout.fragment_dark) {
+class DarkFragment : Fragment(R.layout.fragment_dark) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -21,6 +21,7 @@ class DarkFragment:Fragment(R.layout.fragment_dark) {
             AppCompatDelegate.MODE_NIGHT_NO -> switch.isChecked = false
         }
 
+        // Set listener for switch button
         switch.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 Log.d(TAG, "isChecked")

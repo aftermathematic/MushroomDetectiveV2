@@ -19,7 +19,8 @@ class LanguageFragment : Fragment(R.layout.fragment_language) {
 
         switch.isChecked = Locale.getDefault().language == "nl"
 
-        switch.setOnCheckedChangeListener { buttonView, isChecked ->
+        // Change the locale when the switch is checked
+        switch.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 // Set the locale to NL
                 val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags("nl")

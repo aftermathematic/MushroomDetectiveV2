@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 
 class ArchiveFragment : Fragment(R.layout.fragment_archive) {
 
+    // Get a reference to the ViewModel, RecyclerView and Adapter
     private lateinit var viewModel: MushroomViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: MushroomAdapter

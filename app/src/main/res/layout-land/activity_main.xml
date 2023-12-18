@@ -22,7 +22,6 @@
             android:id="@+id/flFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
     </androidx.core.widget.NestedScrollView>
 
     <!-- BottomNavigationView -->

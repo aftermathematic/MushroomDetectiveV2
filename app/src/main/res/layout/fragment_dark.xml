@@ -32,6 +32,7 @@
         app:useMaterialThemeColors="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/darkFragment" />
+        app:layout_constraintTop_toBottomOf="@+id/darkFragment"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
