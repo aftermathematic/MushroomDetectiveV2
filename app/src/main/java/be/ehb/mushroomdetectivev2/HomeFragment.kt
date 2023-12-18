@@ -32,12 +32,17 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.ByteArrayOutputStream
 import java.io.IOException
 
 class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelectedListener {
 
     // Declare the ActivityResultLaunchers
     private lateinit var permissionLauncher: ActivityResultLauncher<String>
+
+    // Declare a String variable to store the encoded image
+    private var base64Image: String? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -54,6 +59,12 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
                 val imageBitmap = result.data?.extras?.get("data") as Bitmap
                 val imageView: ImageView = view.findViewById(R.id.capturedImage)
                 imageView.setImageBitmap(imageBitmap)
+
+                if(imageBitmap != null) {
+                    val encodedImage = encodeImage(imageBitmap)
+                    base64Image = encodedImage
+                    Log.d("HomeFragment", "Encoded image: $encodedImage")
+                }
             }
         }
 
@@ -106,7 +117,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
                     capShape = getSpinnerValue(R.id.spinner2),
                     capColor = getSpinnerValue(R.id.spinner3),
                     stemWidth = getSpinnerValue(R.id.spinner4),
-                    photoUri = null, // Initialize with null
+                    photoUri = base64Image.toString(), // Initialize with null
                     apiPoison = null, // Initialize with null
                     apiConfidence = null // Initialize with null
                 )
@@ -253,5 +264,11 @@ class HomeFragment : Fragment(R.layout.fragment_home), AdapterView.OnItemSelecte
         return spinner.selectedItem.toString()
     }
 
+    private fun encodeImage(bm: Bitmap): String? {
+        val baos = ByteArrayOutputStream()
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val b = baos.toByteArray()
+        return android.util.Base64.encodeToString(b, android.util.Base64.DEFAULT)
+    }
 
 }

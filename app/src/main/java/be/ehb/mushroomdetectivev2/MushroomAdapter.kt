@@ -15,7 +15,7 @@ class MushroomAdapter : RecyclerView.Adapter<MushroomAdapter.MushroomViewHolder>
         private val capShapeView: TextView = itemView.findViewById(R.id.cap_shape)
         private val capColorView: TextView = itemView.findViewById(R.id.cap_color)
         private val stemWidthView: TextView = itemView.findViewById(R.id.stem_width)
-
+        //private val photoUriView: TextView = itemView.findViewById(R.id.photo_uri)
         private val apiPoisonView: TextView = itemView.findViewById(R.id.api_poison)
         private val apiConfidenceView: TextView = itemView.findViewById(R.id.api_confidence)
 
@@ -35,12 +35,20 @@ class MushroomAdapter : RecyclerView.Adapter<MushroomAdapter.MushroomViewHolder>
             capShapeView.text = mushroom.capShape
             capColorView.text = mushroom.capColor
             stemWidthView.text = mushroom.stemWidth
+            //photoUriView.text = mushroom.photoUri
             apiPoisonView.text = poisonOrEdible
             apiConfidenceView.text = mushroom.apiConfidence
 
-            // write String resource 'poisonous'  to a variable
-            val poisonous = itemView.context.getString(R.string.mushroom_poisonous)
-
+            // Decode base64 string to bitmap and set it to the ImageView (if there is a photo)
+            val photoBase64 = mushroom.photoUri
+            if(photoBase64 != null){
+                val photoByteArray = android.util.Base64.decode(photoBase64, android.util.Base64.DEFAULT)
+                val photoBitmap = android.graphics.BitmapFactory.decodeByteArray(photoByteArray, 0, photoByteArray.size)
+                itemView.findViewById<android.widget.ImageView>(R.id.mushroom_photo).setImageBitmap(photoBitmap)
+            } else {
+                // hide the ImageView
+                itemView.findViewById<android.widget.ImageView>(R.id.mushroom_photo).visibility = android.view.View.GONE
+            }
 
         }
     }

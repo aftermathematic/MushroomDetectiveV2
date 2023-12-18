@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="171dp"
         android:text="EN/NL"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="?attr/colorText"
         android:minWidth="200dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
